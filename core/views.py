@@ -24,8 +24,8 @@ def get_checkout_session(request, item_id):
             'quantity': 1,
         }],
         mode='payment',
-        success_url=f'http://localhost:8000/success/{item_id}',
-        cancel_url=f'http://localhost:8000/cancel/{item_id}',
+        success_url=f'{settings.DOMAIN_URL}/success/{item_id}',
+        cancel_url=f'{settings.DOMAIN_URL}/cancel/{item_id}',
     )
     return JsonResponse({'session_id': checkout_session.id})
 
@@ -38,9 +38,9 @@ def item_detail(request, item_id):
 
 def success_page_view(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'success.html', {'item': item})
+    return render(request, 'success.html', {'item': item, 'domain_url': settings.DOMAIN_URL})
 
 
 def cancel_page_view(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'cancel.html', {'item': item})
+    return render(request, 'cancel.html', {'item': item, 'domain_url': settings.DOMAIN_URL})

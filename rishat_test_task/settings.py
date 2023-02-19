@@ -137,3 +137,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STRIPE_API_KEY = str(os.getenv('STRIPE_API_KEY', None))
 STRIPE_PUBLIC_KEY = str(os.getenv('STRIPE_PUBLIC_KEY', None))
+DOMAIN_URL = str(os.getenv('DOMAIN_URL', 'http://localhost:8000'))
