@@ -1,6 +1,7 @@
 # Rishat test task
 ## Доступные urls:
    ```bash
+   Для теста на удаленном сервер вместо localhost, нужно указать 134.209.232.7
    localhost:8000/admin/ - админ меню (login: admin, pass: admin)
    localhost:8000/buy/<int:item_id>/ - получение checkout_session
    localhost:8000/item/<int:item_id>/ - страница с item и его описанием
