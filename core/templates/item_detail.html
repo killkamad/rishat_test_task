@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ item.name }}</h1>
+<p>{{ item.description }}</p>
+<p>Price: {{ item.price }} {{ item.currency|upper }}</p>
+<button id="checkout-button">Buy Now</button>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+        document.getElementById('checkout-button').addEventListener('click', function(event) {
+            var item_id = {{ item.id }};
+            fetch('/buy/' + item_id)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(session) {
+                    var stripe = Stripe('{{ public_key }}');
+                stripe.redirectToCheckout({
+                    sessionId: session.session_id
+                });
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
+    });
+
+</script>
+{% endblock %}
